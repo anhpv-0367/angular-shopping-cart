@@ -1,6 +1,6 @@
 <h3>Products</h3>
 <div class="product-list-item" *ngFor="let product of products | async">
-    {{ product.name }}
+    {{ product.id }} - {{ product.title }}
     <p *ngIf="product.description">
       Description: {{ product.description }}
     </p>
