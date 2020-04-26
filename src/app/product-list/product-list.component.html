@@ -1,11 +1,124 @@
-<h3>Products</h3>
-<div class="product-list-item" *ngFor="let product of products | async">
-    {{ product.id }} - {{ product.title }}
-    <p *ngIf="product.description">
-      Description: {{ product.description }}
-    </p>
-    <p *ngIf="product.price">
-      Price: {{ product.price }}
-    </p>
-    <br>
+<div id="root">
+  <main>
+    <div class="filters">
+      <h4 class="title">Sizes:</h4>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="XS">
+          <span class="checkmark">XS</span>
+        </label>
+      </div>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="S">
+          <span class="checkmark">S</span>
+        </label>
+      </div>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="M">
+          <span class="checkmark">M</span>
+        </label>
+      </div>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="ML">
+          <span class="checkmark">ML</span>
+        </label>
+      </div>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="L">
+          <span class="checkmark">L</span>
+        </label>
+      </div>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="XL">
+          <span class="checkmark">XL</span>
+        </label>
+      </div>
+      <div class="filters-available-size">
+        <label>
+          <input type="checkbox" value="XXL">
+          <span class="checkmark">XXL</span>
+        </label>
+      </div>
+    </div>
+    <div class="shelf-container">
+      <div class="shelf-container-header">
+        <small class="products-found">
+          <span>{{products.length}} Product(s) found.</span>
+        </small>
+        <div class="sort">
+          Order by
+          <select>
+            <option value="">Select</option>
+            <option value="lowestprice">Lowest to highest</option>
+            <option value="highestprice">Highest to lowest</option>
+          </select>
+        </div>
+      </div>
+      <div class="shelf-item" data-sku="12064273040195392">
+        <div class="shelf-stopper">Free shipping</div>
+        <div class="shelf-item__thumb">
+          <img src="/static/media/12064273040195392_1.2995d79a.jpg" alt="Cat Tee Black T-Shirt">
+        </div>
+        <p class="shelf-item__title">Cat Tee Black T-Shirt</p>
+        <div class="shelf-item__price">
+          <div class="val">
+            <small>$</small>
+            <b>10</b>
+            <span>.90</span>
+          </div>
+          <div class="installment">
+            <span>or 9 x</span>
+            <b>$1.21</b>
+          </div>
+        </div>
+        <div class="shelf-item__buy-btn">Add to cart</div>
+      </div>
+    </div>
+  </main>
+  <div class="float-cart">
+    <span class="bag bag--float-cart-closed">
+      <span class="bag__quantity">1</span>
+    </span>
+    <div class="float-cart__content">
+      <div class="float-cart__header">
+        <span class="bag">
+          <span class="bag__quantity">1</span>
+        </span>
+        <span class="header-title">Cart</span>
+      </div>
+      <div class="float-cart__shelf-container">
+        <div class="shelf-item">
+          <div class="shelf-item__del">
+          </div>
+          <div class="shelf-item__thumb">
+            <img src="">
+            <p class="title">Dark Thug Blue-Navy T-Shirt</p>
+            <p class="desc">M | Front print and paisley print <br>Quantity: 1</p>
+          </div>
+          <div class="shelf-item__price">
+            <p>$  29.45</p>
+            <div>
+              <button disabled="" class="change-product-button">-</button>
+              <button class="change-product-button">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float-cart__footer">
+        <div class="sub">SUBTOTAL</div>
+        <div class="sub-price">
+          <p class="sub-price__val">$ 29.45</p>
+          <small class="sub-price__installment">
+            <span>OR UP TO 5 x $ 5.89</span>
+          </small>
+        </div>
+        <div class="buy-btn">Checkout</div>
+      </div>
+    </div>
+  </div>
 </div>
