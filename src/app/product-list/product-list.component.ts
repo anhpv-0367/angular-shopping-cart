@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Observable, of } from 'rxjs';
 import { Product } from '../shared/model/product.model';
@@ -9,7 +9,7 @@ import { Product } from '../shared/model/product.model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Observable<Product[]>;
+  products;
 
   constructor(
     private productService: ProductService
@@ -20,6 +20,21 @@ export class ProductListComponent implements OnInit {
   }
 
   getProductList() {
-    this.products = this.productService.getProducts()
+    this.productService.getProducts().subscribe(
+      response => {
+        this.products = response;
+      }
+    );
+  }
+
+  onChangeSortValue(value: String) {
+    if (value === "lowestprice")
+    {
+      return this.products = this.products.sort((a,b) => a.price - b.price)
+    }
+    else (value === "highestprice")
+    {
+      return this.products = this.products.sort((a,b) => b.price - a.price)
+    }
   }
 }

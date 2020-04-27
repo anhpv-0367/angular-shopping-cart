@@ -47,19 +47,19 @@
     </div>
     <div class="shelf-container">
       <div class="shelf-container-header">
-        <small class="products-found">
-          <span>Product(s) found.</span>
+        <small class="products-found" *ngIf="products">
+          <span>{{ products.length }} Product(s) found.</span>
         </small>
         <div class="sort">
           Order by
-          <select>
+          <select (change)="onChangeSortValue($event.target.value)">
             <option value="">Select</option>
             <option value="lowestprice">Lowest to highest</option>
             <option value="highestprice">Highest to lowest</option>
           </select>
         </div>
       </div>
-      <div class="shelf-item" *ngFor="let product of products | async">
+      <div class="shelf-item" *ngFor="let product of products">
         <app-product-detail [product]="product"></app-product-detail>
       </div>
     </div>
