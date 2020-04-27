@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../services/product.service';
+import { Observable, of } from 'rxjs';
+import { Product } from '../shared/model/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -7,13 +9,17 @@ import { ProductService } from '../services/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products;
+  products: Observable<Product[]>;
 
   constructor(
     private productService: ProductService
   ) { }
-  
+
   ngOnInit() {
-    this.products = this.productService.getProducts();
+    this.getProductList();
+  }
+
+  getProductList() {
+    this.products = this.productService.getProducts()
   }
 }

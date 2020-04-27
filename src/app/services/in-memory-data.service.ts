@@ -213,7 +213,7 @@ export class InMemoryDataService implements InMemoryDbService {
       },
       {
         "id": 16,
-        "sku": 10412368723880253,
+        "sku": 8552515751438644,
         "title": "Short Sleeve T-Shirt",
         "description": "",
         "availableSizes": ["XS", "X", "L", "ML", "XL"],

@@ -1,0 +1,17 @@
+<div class="shelf-stopper" *ngIf="product.isFreeShipping">Free shipping</div>
+<div class="shelf-item__thumb">
+  <img src="{{imageProduct}}" alt="{{ product.title }}">
+</div>
+<p class="shelf-item__title">{{ product.title }}</p>
+<div class="shelf-item__price">
+  <div class="val">
+    <small>{{ product.currencyFormat }}</small>
+    <b>{{nuberBeforeDot}}</b>
+    <span>{{nuberAfterDot}}</span>
+  </div>
+  <div class="installment" *ngIf="isInstallment">
+    <span>or {{ product.installments }} x </span>
+    <b>${{ installmentPrice }}</b>
+  </div>
+</div>
+<div class="shelf-item__buy-btn">Add to cart</div>
