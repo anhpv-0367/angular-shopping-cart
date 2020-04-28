@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { Observable, of } from 'rxjs';
-import { Product } from '../shared/model/product.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-list',
@@ -9,17 +8,40 @@ import { Product } from '../shared/model/product.model';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Observable<Product[]>;
+  products;
+  status: boolean = false;
+  sortlowestprice = (a,b) => {
+    return a.price < b.price ? -1 : 1;
+  }
+
+  sorthighestprice = (a,b) => {
+    return a.price > b.price ? -1 : 1;
+  }
 
   constructor(
     private productService: ProductService
   ) { }
 
   ngOnInit() {
-    this.getProductList();
+    this.products = this.productService.getProducts();
   }
 
-  getProductList() {
-    this.products = this.productService.getProducts()
+  onChangeSortValue(value: String) {
+    if (value === "lowestprice")
+    {
+      return this.products = this.products.pipe(
+        map((data: []) => { return data.sort(this.sortlowestprice) })
+      );
+    }
+    else (value === "highestprice")
+    {
+      return this.products = this.products.pipe(
+        map((data: []) => { return data.sort(this.sorthighestprice) })
+      );
+    }
+  }
+
+  clickEvent() {
+    this.status = !this.status;
   }
 }

@@ -47,12 +47,12 @@
     </div>
     <div class="shelf-container">
       <div class="shelf-container-header">
-        <small class="products-found">
-          <span>Product(s) found.</span>
+        <small class="products-found" *ngIf="(products | async)?.length > 0">
+          <span>{{(products | async)?.length}} Product(s) found.</span>
         </small>
         <div class="sort">
           Order by
-          <select>
+          <select (change)="onChangeSortValue($event.target.value)">
             <option value="">Select</option>
             <option value="lowestprice">Lowest to highest</option>
             <option value="highestprice">Highest to lowest</option>
@@ -64,45 +64,14 @@
       </div>
     </div>
   </main>
-  <div class="float-cart">
-    <span class="bag bag--float-cart-closed">
+  <div class="float-cart" [ngClass]="status ? 'float-cart--open' : ''">
+    <span class="bag bag--float-cart-closed" (click)="clickEvent()" *ngIf="!status; else closeCart">
       <span class="bag__quantity">1</span>
     </span>
-    <div class="float-cart__content">
-      <div class="float-cart__header">
-        <span class="bag">
-          <span class="bag__quantity">1</span>
-        </span>
-        <span class="header-title">Cart</span>
-      </div>
-      <div class="float-cart__shelf-container">
-        <div class="shelf-item">
-          <div class="shelf-item__del">
-          </div>
-          <div class="shelf-item__thumb">
-            <img src="">
-            <p class="title">Dark Thug Blue-Navy T-Shirt</p>
-            <p class="desc">M | Front print and paisley print <br>Quantity: 1</p>
-          </div>
-          <div class="shelf-item__price">
-            <p>$  29.45</p>
-            <div>
-              <button disabled="" class="change-product-button">-</button>
-              <button class="change-product-button">+</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="float-cart__footer">
-        <div class="sub">SUBTOTAL</div>
-        <div class="sub-price">
-          <p class="sub-price__val">$ 29.45</p>
-          <small class="sub-price__installment">
-            <span>OR UP TO 5 x $ 5.89</span>
-          </small>
-        </div>
-        <div class="buy-btn">Checkout</div>
-      </div>
-    </div>
+    <app-product-cart>
+    </app-product-cart>
   </div>
+  <ng-template #closeCart>
+    <div class="float-cart__close-btn" (click)="clickEvent()">X</div>
+  </ng-template>
 </div>
