@@ -225,6 +225,49 @@ export class InMemoryDataService implements InMemoryDbService {
         "isFreeShipping": true
       },
     ];
-    return {products};
+
+    const sizes = [
+      {
+        key: "X",
+        value: "X",
+        checked: false
+      },
+      {
+        key: "XS",
+        value: "XS",
+        checked: false
+      },
+      {
+        key: "S",
+        value: "S",
+        checked: false
+      },
+      {
+        key: "M",
+        value: "M",
+        checked: false
+      },
+      {
+        key: "ML",
+        value: "ML",
+        checked: false
+      },
+      {
+        key: "L",
+        value: "L",
+        checked: false
+      },
+      {
+        key: "XL",
+        value: "XL",
+        checked: false
+      },
+      {
+        key: "XXL",
+        value: "XXL",
+        checked: false
+      }
+    ];
+    return {products, sizes};
   }
 }
