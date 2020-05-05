@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { map } from 'rxjs/operators';
+import { Size } from '../shared/model/size.model';
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-product-list',
@@ -9,6 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class ProductListComponent implements OnInit {
   products;
+  sizes: any;
   status: boolean = false;
   sortlowestprice = (a,b) => {
     return a.price < b.price ? -1 : 1;
@@ -23,7 +26,12 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
+    this.productService.getProducts().subscribe((data: any) => {
+      this.products = data;
+    });;
+    this.productService.getSizes().subscribe((data: any) => {
+      this.sizes = data;
+    });
   }
 
   onChangeSortValue(value: String) {
@@ -39,6 +47,18 @@ export class ProductListComponent implements OnInit {
         map((data: []) => { return data.sort(this.sorthighestprice) })
       );
     }
+  }
+
+  filterByListSizes(){
+    const sizes_checked = this.sizes.filter((size: Size) => size.checked === true);
+    this.productService.filterProductBySize(sizes_checked).subscribe((data: any) => {
+      this.products = data;
+    });
+  }
+
+  changeSize(size) {
+    size.checked = !size.checked;
+    this.filterByListSizes();
   }
 
   clickEvent() {
