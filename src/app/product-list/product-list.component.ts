@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { map } from 'rxjs/operators';
 import { Size } from '../shared/model/size.model';
@@ -10,6 +10,7 @@ import { Observable } from 'rxjs'
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+  cartProductList = [];
   products;
   sizes: any;
   status: boolean = false;
@@ -37,15 +38,11 @@ export class ProductListComponent implements OnInit {
   onChangeSortValue(value: String) {
     if (value === "lowestprice")
     {
-      return this.products = this.products.pipe(
-        map((data: []) => { return data.sort(this.sortlowestprice) })
-      );
+      return this.products = this.products.sort(this.sortlowestprice)
     }
     else (value === "highestprice")
     {
-      return this.products = this.products.pipe(
-        map((data: []) => { return data.sort(this.sorthighestprice) })
-      );
+      return this.products = this.products.sort(this.sorthighestprice)
     }
   }
 
@@ -64,4 +61,31 @@ export class ProductListComponent implements OnInit {
   clickEvent() {
     this.status = !this.status;
   }
+
+  addProductToCart(product) {
+    const productExistInCart = this.cartProductList.find(({id}) => id === product.id);
+    if (!productExistInCart) {
+      return this.cartProductList.push({...product, num:1});
+    }
+    productExistInCart.num += 1;
+  }
+
+  removeProduct(product) {
+    this.cartProductList = this.cartProductList.filter(
+      ({ id }) => id !== product.id
+    );
+  }
+
+  checkoutProduct(product) {
+    for (let product of this.cartProductList) {
+      this.cartProductList = this.cartProductList.filter(
+        ({ id }) => id !== product.id
+      );
+    }
+  }
+
+  calcTotal() {
+    return this.cartProductList.reduce((acc, prod) => acc+= prod.num ,0)
+  }
 }
+
