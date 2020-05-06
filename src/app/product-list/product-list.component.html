@@ -24,15 +24,15 @@
         </div>
       </div>
       <div class="shelf-item" *ngFor="let product of products">
-        <app-product-detail [product]="product"></app-product-detail>
+        <app-product-detail [product]="product" (productAdded)="addProductToCart($event)"></app-product-detail>
       </div>
     </div>
   </main>
   <div class="float-cart" [ngClass]="status ? 'float-cart--open' : ''">
     <span class="bag bag--float-cart-closed" (click)="clickEvent()" *ngIf="!status; else closeCart">
-      <span class="bag__quantity">1</span>
+      <span class="bag__quantity">{{calcTotal()}}</span>
     </span>
-    <app-product-cart>
+    <app-product-cart [products]="cartProductList" (productRemoved)="removeProduct($event)" (productCheckouted)="checkoutProduct($event)">
     </app-product-cart>
   </div>
   <ng-template #closeCart>

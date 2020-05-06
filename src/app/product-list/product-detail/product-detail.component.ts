@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../shared/model/product.model';
 
 @Component({
@@ -7,7 +7,12 @@ import { Product } from '../../shared/model/product.model';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() product: Product;
+  @Input() product: any;
+  @Output() productAdded = new EventEmitter();
+
+  addProductToCart(product) {
+    this.productAdded.emit(product);
+  }
 
   constructor() { }
 
@@ -37,5 +42,4 @@ export class ProductDetailComponent implements OnInit {
       return (this.product.price / this.product.installments).toFixed(2);
     }
   }
-
 }

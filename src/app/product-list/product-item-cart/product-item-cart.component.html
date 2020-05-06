@@ -1,0 +1,16 @@
+<div class="shelf-item__del" (click)="removeProduct($event)">
+</div>
+<div class="shelf-item__thumb">
+  <img src="{{imageProduct}}" alt="{{ product.title }}">
+</div>
+<div class="shelf-item__details">
+  <p class="title">{{ product.title }}</p>
+  <p class="desc">M | Front print and paisley print <br>Quantity: {{product.num}}</p>
+</div>
+<div class="shelf-item__price">
+  <p>{{ product.currencyFormat }}  {{product.price}}</p>
+  <div>
+    <button [disabled]="isReduced()" class="change-product-button" (click)="reducedProduct($event)">-</button>
+    <button class="change-product-button" (click)="increaseProduct($event)">+</button>
+  </div>
+</div>

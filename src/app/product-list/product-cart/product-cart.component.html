@@ -1,36 +1,20 @@
 <div class="float-cart__content">
   <div class="float-cart__header">
     <span class="bag">
-      <span class="bag__quantity">1</span>
+      <span class="bag__quantity">{{calcTotal}}</span>
     </span>
     <span class="header-title">Cart</span>
   </div>
   <div class="float-cart__shelf-container">
-    <div class="shelf-item">
-      <div class="shelf-item__del">
-      </div>
-      <div class="shelf-item__thumb">
-        <img src="">
-        <p class="title">Dark Thug Blue-Navy T-Shirt</p>
-        <p class="desc">M | Front print and paisley print <br>Quantity: 1</p>
-      </div>
-      <div class="shelf-item__price">
-        <p>$  29.45</p>
-        <div>
-          <button disabled="" class="change-product-button">-</button>
-          <button class="change-product-button">+</button>
-        </div>
-      </div>
+    <div class="shelf-item" *ngFor="let product of products">
+      <app-product-item-cart [product]="product" (productRemoved)="removeProduct($event)"></app-product-item-cart>
     </div>
   </div>
   <div class="float-cart__footer">
     <div class="sub">SUBTOTAL</div>
     <div class="sub-price">
-      <p class="sub-price__val">$ 29.45</p>
-      <small class="sub-price__installment">
-        <span>OR UP TO 5 x $ 5.89</span>
-      </small>
+      <p class="sub-price__val">$ {{totalPrice}}</p>
     </div>
-    <div class="buy-btn">Checkout</div>
+    <div class="buy-btn" (click)="checkoutProduct($event)">Checkout</div>
   </div>
 </div>
